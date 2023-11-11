@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_jlms_courses</name>
+	<author>Gonzalo R. Meneses A.</author>
+    <creationDate>2023-10-23</creationDate>
+	<copyright>(C) 2023 Gonzalo R. Meneses A.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>alakentu2003@gmail.com</authorEmail>
+	<authorUrl>https://www.github.com/alakentu</authorUrl>
+    <version>5.0.0</version>
+	<description>MOD_JLMS_COURSES_XML_DESCRIPTION</description>
+	<namespace path="src">Alakentu\Module\JlmsCourses</namespace>
+	<files>
+		<folder module="mod_jlms_courses">services</folder>
+        <folder>assets</folder>
+        <folder>src</folder>
+		<folder>tmpl</folder>
+    </files>
+	<languages>
+		<language tag="en-GB">language/en-GB/mod_jlms_courses.ini</language>
+		<language tag="en-GB">language/en-GB/mod_jlms_courses.sys.ini</language>
+		<language tag="es-ES">language/es-ES/mod_jlms_courses.ini</language>
+		<language tag="es-ES">language/es-ES/mod_jlms_courses.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldprefix="Alakentu\Module\Jlms\Site\Field">
+			<fieldset name="basic">
+				<field 
+					name="howManyC" 
+					type="text" 
+					label="MOD_JLMS_COURSES_HOW_MANY" 
+					default="10" 
+					filter="integer" 
+				/>
+				
+				<field 
+					name="sortby" 
+					type="list" 
+					label="MOD_JLMS_COURSES_SORTBY" 
+					default="0" 
+					filter="integer" 
+					validate="options"
+				>
+					<option value="0">MOD_JLMS_COURSES_MOST_POPULAR</option>
+					<option value="1">MOD_JLMS_COURSES_MOST_RECENT</option>
+					<option value="2">MOD_JLMS_COURSES_RANDOM</option>
+				</field>
+
+				<field 
+					name="category" 
+					type="categories" 
+					label="MOD_JLMS_COURSES_CATEGORY" 
+					extension="com_jlms" 
+					multiple="true" 
+					layout="joomla.form.field.list-fancy-select" 
+					filter="intarray"
+					class="multipleCategories"
+				/>
+
+				<field 
+					name="orientation" 
+					type="list" 
+					label="MOD_JLMS_COURSES_ORIENTATION" 
+					default="1" 
+					filter="integer" 
+					validate="options"
+				>
+					<option value="0">MOD_JLMS_COURSES_HORIZONTAL</option>
+					<option value="1">MOD_JLMS_COURSES_VERTICAL</option>
+				</field>
+
+				<field 
+					name="showthumb" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_THUMB" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showcateg" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_CATEG" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showamountstud" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_AMOUNT_STUD" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showprice" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_SHOW_PRICE" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showlevel" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_SHOW_LEVEL" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showduration" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_SHOW_DURATION" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showcountlesson" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_SHOW_COUNT_LESSON" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showrating" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_SHOW_RATING" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showdescription" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_SHOWDESCRIPTION" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				
+				<field 
+					name="desclength" 
+					type="text" 
+					label="MOD_JLMS_COURSES_DESC_LENGTH" 
+					default="100" 
+					filter="integer" 
+				/>
+				
+				<field 
+					name="desclengthtype" 
+					type="list" 
+					label="MOD_JLMS_COURSES_DESC_LENGTH_TYPE" 
+					default="0" 
+					filter="integer" 
+					validate="options"
+				>
+					<option value="0">MOD_JLMS_COURSES_WORDS</option>
+					<option value="1">MOD_JLMS_COURSES_CHARACTER</option>
+				</field>
+				
+				<field 
+					name="teachername" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_TEACHER_NAME" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field 
+					name="showteacherthumb" 
+					type="radio" 
+					label="MOD_JLMS_COURSES_TEACHERTHUMB" 
+					layout="joomla.form.field.radio.switcher" 
+					default="1" 
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="1"
+					filter="integer"
+					validate="options"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+					filter="integer"
+				/>
+
+				<field
+					name="cachemode"
+					type="hidden"
+					default="itemid"
+					>
+					<option value="itemid"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
